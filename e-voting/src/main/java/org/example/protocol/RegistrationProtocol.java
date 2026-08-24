@@ -1,10 +1,10 @@
 package org.example.protocol;
 
-import org.example.autorità.ElectionAutority;
-import org.example.autorità.RegistrationAutority;
+import org.example.autorita.ElectionAutority;
+import org.example.autorita.RegistrationAutority;
 import org.example.bulletin.PublicBulletinBoard;
-import org.example.entità.Token;
-import org.example.entità.Voter;
+import org.example.entita.Token;
+import org.example.entita.Voter;
 
 public class RegistrationProtocol {
     private final RegistrationAutority ar;

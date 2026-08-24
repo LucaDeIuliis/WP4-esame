@@ -2,9 +2,9 @@ package org.example.protocol;
 
 import org.example.crypto.RSAUtils;
 import org.example.crypto.SignatureUtils;
-import org.example.entità.Token;
-import org.example.entità.Vote;
-import org.example.entità.Voter;
+import org.example.entita.Token;
+import org.example.entita.Vote;
+import org.example.entita.Voter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

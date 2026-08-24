@@ -1,13 +1,13 @@
 package org.example.protocol;
 
-import org.example.autorità.ElectionAutority;
+import org.example.autorita.ElectionAutority;
 import org.example.bulletin.MerkleProof;
 import org.example.bulletin.MerkleTree;
 import org.example.bulletin.PublicBulletinBoard;
 import org.example.crypto.HashUtils;
 import org.example.crypto.RSAUtils;
 import org.example.crypto.SignatureUtils;
-import org.example.entità.VoteRecord;
+import org.example.entita.VoteRecord;
 
 import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;

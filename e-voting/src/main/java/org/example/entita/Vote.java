@@ -1,4 +1,4 @@
-package org.example.entità;
+package org.example.entita;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;

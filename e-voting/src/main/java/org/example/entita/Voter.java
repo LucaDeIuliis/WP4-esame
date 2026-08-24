@@ -1,4 +1,4 @@
-package org.example.entità;
+package org.example.entita;
 
 public class Voter {
     private final String id;

@@ -2,7 +2,7 @@ package org.example.bulletin;
 
 import org.example.crypto.HashUtils;
 import org.example.crypto.SignatureUtils;
-import org.example.entità.VoteRecord;
+import org.example.entita.VoteRecord;
 
 import java.nio.charset.StandardCharsets;
 import java.security.PrivateKey;

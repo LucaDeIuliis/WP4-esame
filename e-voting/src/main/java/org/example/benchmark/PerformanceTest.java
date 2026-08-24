@@ -1,16 +1,16 @@
 package org.example.benchmark;
 
-import org.example.autorità.ElectionAutority;
-import org.example.autorità.RegistrationAutority;
+import org.example.autorita.ElectionAutority;
+import org.example.autorita.RegistrationAutority;
 import org.example.bulletin.PublicBulletinBoard;
 import org.example.crypto.HashUtils;
 import org.example.crypto.KeyManager;
 import org.example.crypto.RSAUtils;
 import org.example.crypto.SignatureUtils;
-import org.example.entità.Token;
-import org.example.entità.Vote;
-import org.example.entità.VoteRecord;
-import org.example.entità.Voter;
+import org.example.entita.Token;
+import org.example.entita.Vote;
+import org.example.entita.VoteRecord;
+import org.example.entita.Voter;
 import org.example.protocol.RegistrationProtocol;
 import org.example.protocol.VotingProtocol;
 

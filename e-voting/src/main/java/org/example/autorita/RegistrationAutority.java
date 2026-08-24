@@ -1,9 +1,9 @@
-package org.example.autorità;
+package org.example.autorita;
 
 import org.example.crypto.HashUtils;
 import org.example.crypto.SignatureUtils;
-import org.example.entità.Token;
-import org.example.entità.Voter;
+import org.example.entita.Token;
+import org.example.entita.Voter;
 
 import java.security.KeyPair;
 import java.security.SecureRandom;

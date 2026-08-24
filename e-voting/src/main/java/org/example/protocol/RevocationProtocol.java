@@ -1,11 +1,11 @@
 package org.example.protocol;
 
-import org.example.autorità.ElectionAutority;
+import org.example.autorita.ElectionAutority;
 import org.example.crypto.SignatureUtils;
-import org.example.entità.Token;
-import org.example.entità.Vote;
-import org.example.entità.VoteRecord;
-import org.example.entità.Voter;
+import org.example.entita.Token;
+import org.example.entita.Vote;
+import org.example.entita.VoteRecord;
+import org.example.entita.Voter;
 
 import java.nio.charset.StandardCharsets;
 

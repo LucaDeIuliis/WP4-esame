@@ -1,4 +1,4 @@
-package org.example.entità;
+package org.example.entita;
 
 import java.util.Arrays;
 

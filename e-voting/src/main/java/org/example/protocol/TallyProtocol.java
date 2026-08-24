@@ -1,10 +1,10 @@
 package org.example.protocol;
 
-import org.example.autorità.ElectionAutority;
+import org.example.autorita.ElectionAutority;
 import org.example.bulletin.PublicBulletinBoard;
 import org.example.crypto.RSAUtils;
 import org.example.crypto.SignatureUtils;
-import org.example.entità.VoteRecord;
+import org.example.entita.VoteRecord;
 
 import java.nio.charset.StandardCharsets;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -51,7 +51,7 @@ public class TallyProtocol {
                     throw new IllegalArgumentException("idc incoerente");
                 record.setPlaintext(plaintext);
                 counted.add(record);
-                if (decoded.choice() == org.example.entità.Vote.Choice.YES) yes++;
+                if (decoded.choice() == org.example.entita.Vote.Choice.YES) yes++;
                 else no++;
             } catch (RuntimeException ex) {
                 record.markInvalid();

@@ -1,4 +1,4 @@
-package org.example.entità;
+package org.example.entita;
 
 import org.example.bulletin.MerkleProof;
 

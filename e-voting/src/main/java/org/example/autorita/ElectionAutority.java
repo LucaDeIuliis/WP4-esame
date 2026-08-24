@@ -1,11 +1,11 @@
-package org.example.autorità;
+package org.example.autorita;
 
 import org.example.bulletin.PublicBulletinBoard;
 import org.example.crypto.HashUtils;
 import org.example.crypto.SignatureUtils;
-import org.example.entità.Token;
-import org.example.entità.Vote;
-import org.example.entità.VoteRecord;
+import org.example.entita.Token;
+import org.example.entita.Vote;
+import org.example.entita.VoteRecord;
 
 import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
