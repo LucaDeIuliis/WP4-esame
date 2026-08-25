@@ -32,7 +32,12 @@ public class PerformanceTest {
     }
 
     public static Measurement runSingle(int n) {
-        if (n <= 0) throw new IllegalArgumentException("n deve essere positivo");
+        if (n <= 0)
+            throw new IllegalArgumentException("n deve essere positivo");
+
+        if (n > 5000)
+            throw new IllegalArgumentException(
+                    "n troppo grande per il benchmark locale: massimo 5000");
 
         long t0 = System.nanoTime();
         KeyPair benchmarkKeys = RSAUtils.generateKeyPair(2048);
@@ -48,8 +53,12 @@ public class PerformanceTest {
         long signatureNs = System.nanoTime() - t0;
 
         t0 = System.nanoTime();
-        SignatureUtils.verifyFdh(ciphertext, signature, benchmarkKeys.getPublic());
+        boolean verified =
+                SignatureUtils.verifyFdh(ciphertext, signature, benchmarkKeys.getPublic());
         long verificationNs = System.nanoTime() - t0;
+
+        if (!verified)
+            throw new IllegalStateException("Verifica RSA-FDH fallita nel benchmark");
 
         KeyManager km = new KeyManager(2048);
         RegistrationAutority ar = new RegistrationAutority(km.getArKeys());

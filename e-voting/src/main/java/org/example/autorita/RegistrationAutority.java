@@ -21,7 +21,8 @@ public class RegistrationAutority {
         this.keys = Objects.requireNonNull(keys);
     }
 
-    public void registerVoter(Voter voter) {
+    public synchronized void registerVoter(Voter voter) {
+        Objects.requireNonNull(voter, "voter");
         if (voters.putIfAbsent(voter.getUsername(), voter) != null)
             throw new IllegalArgumentException("Elettore già registrato");
     }

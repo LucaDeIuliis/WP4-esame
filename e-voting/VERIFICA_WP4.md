@@ -1,6 +1,6 @@
 # Verifica generale WP4
 
-Data verifica: 2026-08-24
+Data verifica: 2026-08-25
 
 ## Build
 
@@ -50,10 +50,15 @@ Sono stati verificati separatamente:
 - verifica universale;
 - verifica individuale post-chiusura;
 - verifica della ricevuta firmata dall'AE.
-
+- rifiuto della verifica individuale del voto precedente dopo una sostituzione;
+- verifica del voto sostitutivo;
+- verifica della firma della ricevuta del voto sostitutivo.
 ## Nomi e struttura
 
-I nomi delle classi e dei package sono stati mantenuti coerenti con gli scheletri originali del repository. In particolare, `ElectionAutority`, `RegistrationAutority`, `autorità` ed `entità` sono nomi già presenti nello scheletro iniziale e non sono stati rinominati arbitrariamente per non rompere la coerenza con gli altri WP.
+I nomi delle classi e dei package sono stati mantenuti coerenti con gli scheletri originali del repository. In particolare, `ElectionAutority` e `RegistrationAutority` sono nomi
+già presenti nello scheletro iniziale e sono stati mantenuti per non
+rompere la coerenza con gli altri WP. I package Java effettivamente
+utilizzati sono `autorita` ed `entita`.
 
 ## Nota
 

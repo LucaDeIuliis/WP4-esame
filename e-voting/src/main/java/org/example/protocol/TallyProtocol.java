@@ -37,8 +37,22 @@ public class TallyProtocol {
                 announcementMessage.getBytes(StandardCharsets.UTF_8),
                 ae.getCertificateKeys().getPrivate());
 
-        board.publishTokenHashes(ae.getRegistrationAutority().getIssuedTokenHashes());
-        board.close(skAE.getEncoded(), finalRoot, timestamp, announcementSignature);
+        int issuedTokenCount =
+                ae.getRegistrationAutority().getIssuedTokenCount();
+
+        board.publishTokenCount(issuedTokenCount);
+
+        if (!board.hasValidTokenCount()) {
+            throw new SecurityException(
+                    "Numero di schede pubblicate superiore al numero di token emessi");
+        }
+
+        board.close(
+                skAE.getEncoded(),
+                finalRoot,
+                timestamp,
+                announcementSignature
+        );
 
         List<VoteRecord> counted = new ArrayList<>();
         int yes = 0, no = 0;

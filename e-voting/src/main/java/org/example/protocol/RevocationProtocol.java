@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 
 public class RevocationProtocol {
     private final ElectionAutority ae;
-    private final VotingProtocol votingProtocol = new VotingProtocol();
 
     public RevocationProtocol(ElectionAutority ae) {
         this.ae = ae;

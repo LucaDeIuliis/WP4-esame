@@ -24,7 +24,7 @@ public class Main {
         PublicBulletinBoard board = new PublicBulletinBoard();
         ElectionAutority ae = new ElectionAutority(
                 keys.getAeKeys(), keys.getAeCertificateKeys(), ar, board);
-
+        VerificationProtocol verification = new VerificationProtocol(ae);
         RegistrationProtocol registration = new RegistrationProtocol(ar, ae);
         VotingProtocol voting = new VotingProtocol();
 
@@ -59,6 +59,8 @@ public class Main {
         RevocationProtocol revocation = new RevocationProtocol(ae);
         VoteRecord replacementRecord = revocation.replaceVote(
                 carol, replacementToken, replacementVote, carolRecord.getIdc());
+        boolean oldCarolVoteRejected =
+                !verification.verifyIndividual(carolRecord.getIdc());
         carol.setVote(replacementVote);
 
         // Chiusura, pubblicazione della chiave e scrutinio.
@@ -68,15 +70,16 @@ public class Main {
         bobVote.destroyEphemeralPrivateKey();
         carolVote.destroyEphemeralPrivateKey();
         replacementVote.destroyEphemeralPrivateKey();
-
-        VerificationProtocol verification = new VerificationProtocol(ae);
         VerificationProtocol.UniversalResult universal = verification.verifyUniversal();
 
         System.out.println("=== WP4 e-voting ===");
         System.out.println("Schede pubblicate: " + board.getRecords().size());
+        System.out.println("Token emessi: " + board.getTokenCountPublished());
+        System.out.println("Coerenza token/schede: " + board.hasValidTokenCount());
         System.out.println("Risultato: YES=" + board.getYesCount() + ", NO=" + board.getNoCount());
         System.out.println("Root finale: " + board.getFinalRootHex());
         System.out.println("Verifica universale: " + universal.valid());
+        System.out.println("Vecchio voto Carol non verificabile dopo sostituzione: " + oldCarolVoteRejected);
 
         boolean aliceVerified = verification.verifyIndividualAfterClosing(
                 aliceRecord.getIdc(), alice.getVote().getId(), alice.getVote().getChoice().getValue());

@@ -16,12 +16,20 @@ Implementazione simulata del protocollo di e-voting descritto in WP1/WP2/WP3.
 - Pubblicazione autenticata di `skAE` alla chiusura.
 - Scrutinio verificabile e verifica individuale/universale.
 - Benchmark delle operazioni crittografiche, Merkle Tree, scrutinio e dimensione dei messaggi.
+## Assunzioni del WP4
 
+Il progetto realizza un ambiente stand-alone simulato. Le entità AR, AE,
+elettore e bacheca pubblica sono rappresentate da componenti Java locali.
+
+Non viene realizzata una rete reale né una CA/TLS reale: la simulazione
+riproduce le operazioni crittografiche e il flusso del protocollo definiti
+nei WP precedenti, permettendo di verificare le proprietà funzionali e
+misurare i costi computazionali richiesti dal WP4.
 ## Struttura
 
 ```text
 src/main/java/org/example/
-├── autorità/
+├── autorita/
 │   ├── ElectionAutority.java
 │   └── RegistrationAutority.java
 ├── benchmark/
@@ -35,7 +43,7 @@ src/main/java/org/example/
 │   ├── KeyManager.java
 │   ├── RSAUtils.java
 │   └── SignatureUtils.java
-├── entità/
+├── entita/
 │   ├── Token.java
 │   ├── Vote.java
 │   ├── VoteRecord.java
@@ -99,3 +107,4 @@ La generazione della chiave RSA effimera per ogni voto è intenzionalmente mante
 ## Nota implementativa
 
 La simulazione non realizza una rete reale, TLS o una CA: questi elementi sono modellati come separazione logica e uso delle primitive crittografiche nel processo locale. Il WP4 è quindi un ambiente stand-alone, coerente con la traccia, che permette di verificare il flusso e misurare i costi delle operazioni.
+L'autenticazione delle credenziali è simulata localmente; la gestione sicura delle password non costituisce oggetto del WP4.

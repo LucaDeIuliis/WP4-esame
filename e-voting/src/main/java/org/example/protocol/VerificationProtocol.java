@@ -26,17 +26,29 @@ public class VerificationProtocol {
 
     public boolean verifyIndividual(String idc) {
         VoteRecord record = board.findByIdc(idc);
-        if (record == null || record.getStatus() == VoteRecord.Status.INVALID) return false;
+
+        if (record == null || record.getStatus() != VoteRecord.Status.VALID)
+            return false;
 
         PublicBulletinBoard.RootSnapshot snapshot = latestSnapshot();
+
         boolean rootOk = SignatureUtils.verifyFdh(
                 (snapshot.rootHex() + "|" + snapshot.timestamp()).getBytes(StandardCharsets.UTF_8),
-                snapshot.signature(), ae.getKeys().getPublic());
+                snapshot.signature(),
+                ae.getKeys().getPublic());
+
         if (!rootOk) return false;
 
         MerkleProof proof = board.getMerkleTree().proofFor(record.getCiphertext());
-        return MerkleTree.verify(record.getCiphertext(), proof,
+
+        return MerkleTree.verify(
+                record.getCiphertext(),
+                proof,
                 hexToBytes(snapshot.rootHex()));
+    }
+    public boolean isReplaced(String idc) {
+        VoteRecord record = board.findByIdc(idc);
+        return record != null && record.getStatus() == VoteRecord.Status.REPLACED;
     }
 
     public boolean verifyIndividualAfterClosing(String idc, byte[] expectedId, int expectedChoice) {
@@ -55,7 +67,11 @@ public class VerificationProtocol {
     }
 
     public UniversalResult verifyUniversal() {
-        if (!board.isClosed() || board.getClosingAnnouncement() == null) return new UniversalResult(false, 0, 0);
+        if (!board.isClosed() || board.getClosingAnnouncement() == null)
+            return new UniversalResult(false, 0, 0);
+
+        if (!board.hasValidTokenCount())
+            return new UniversalResult(false, 0, 0);
 
         var ann = board.getClosingAnnouncement();
         String keyB64 = Base64.getEncoder().encodeToString(ann.secretKeyEncoded());

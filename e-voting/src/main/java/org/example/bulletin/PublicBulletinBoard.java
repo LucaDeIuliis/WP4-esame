@@ -35,7 +35,7 @@ public class PublicBulletinBoard {
     private final MerkleTree merkleTree = new MerkleTree();
     private final List<RootSnapshot> rootSnapshots = new ArrayList<>();
     private final Map<String, String> replacementMarks = new LinkedHashMap<>();
-    private final List<String> tokenHashesPublished = new ArrayList<>();
+    private Integer tokenCountPublished;
 
     private String finalRootHex;
     private byte[] aeSecretKeyEncoded;
@@ -53,15 +53,11 @@ public class PublicBulletinBoard {
     }
 
     public synchronized void publishTokenCount(int count) {
-        tokenHashesPublished.clear();
-        for (int i = 0; i < count; i++) tokenHashesPublished.add("token-" + i);
-    }
+        if (count < 0)
+            throw new IllegalArgumentException("Conteggio token non valido");
 
-    public synchronized void publishTokenHashes(List<String> hashes) {
-        tokenHashesPublished.clear();
-        tokenHashesPublished.addAll(hashes);
+        this.tokenCountPublished = count;
     }
-
     public synchronized void markReplaced(String oldIdc, String markSignatureHex) {
         replacementMarks.put(oldIdc, markSignatureHex);
     }
@@ -104,8 +100,15 @@ public class PublicBulletinBoard {
     public synchronized List<RootSnapshot> getRootSnapshots() {
         return Collections.unmodifiableList(new ArrayList<>(rootSnapshots));
     }
-    public synchronized List<String> getTokenHashesPublished() {
-        return Collections.unmodifiableList(new ArrayList<>(tokenHashesPublished));
+
+    public synchronized Integer getTokenCountPublished() {
+        return tokenCountPublished;
+    }
+    public synchronized boolean hasValidTokenCount() {
+        if (tokenCountPublished == null)
+            return false;
+
+        return records.size() <= tokenCountPublished;
     }
     public synchronized Map<String,String> getReplacementMarks() {
         return Collections.unmodifiableMap(new LinkedHashMap<>(replacementMarks));
